@@ -43,7 +43,7 @@ public class WorkPlaceService{
         repository.save(workPlace);
     }
 
-    public WorkPlaceRequest createWorkPlace(long market_id,long user_id, WorkPlaceRequest request) {
+    public WorkPlaceRequest createWorkPlace(long user_id,long market_id, WorkPlaceRequest request) {
         WorkPlace workPlace = mapToEntity(request);
 
         Market market = marketRepository.findById(market_id).orElseThrow(() -> new ResourceNotFoundException("Market with associated review not found"));
@@ -92,17 +92,20 @@ public class WorkPlaceService{
     }
 
     public WorkPlaceRequest updateWorkPlace(long user_id, long market_id, WorkPlaceRequest request) {
-
+        WorkPlace workPlace = repository.findByUserMarket(user_id,market_id);
         User users = userRepository.findById(user_id).orElseThrow(() -> new ResourceNotFoundException("User with associate WorkPlace not found"));
         Market market = marketRepository.findById(market_id).orElseThrow(() -> new ResourceNotFoundException("Market with associated WorkPlace not found"));
-        WorkPlace workPlace = repository.findByUserMarket(user_id,market_id);
+
        if(workPlace.getUsers().getId()!= users.getId()) {
             throw new ResourceNotFoundException("This User does not belong to a WorkPlace");
         }
        if(workPlace.getMarket().getMarket_id()!= market.getMarket_id()) {
             throw new ResourceNotFoundException("This Market does not belong to a WorkPlace");
         }
-
+       User newUsers = userRepository.findById(request.getUsers().getId()).orElseThrow(() -> new ResourceNotFoundException("User with associate WorkPlace not found"));
+       Market newMarket = marketRepository.findById(request.getMarket().getMarket_id()).orElseThrow(() -> new ResourceNotFoundException("Market with associated WorkPlace not found"));
+       workPlace.setUsers(newUsers);
+       workPlace.setMarket(newMarket);
        WorkPlace updateWorkPlace = repository.save(workPlace);
 
        return mapToRequest(updateWorkPlace);
@@ -132,7 +135,10 @@ public class WorkPlaceService{
     private WorkPlace mapToEntity(WorkPlaceRequest request) {
         WorkPlace workPlace = new WorkPlace();
         workPlace.setWorkplace_id(request.getWorkplace_id());
+        request.setUsers(workPlace.users);
+        request.setMarket(workPlace.market);
         return workPlace;
     }
+
 
 }

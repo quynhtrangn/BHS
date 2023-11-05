@@ -35,6 +35,7 @@ public class Market {
     public City city;
 
     @OneToMany(mappedBy = "market",fetch = FetchType.EAGER)
+    @JsonIgnore
     private List<WorkPlace> workPlaces;
 
 }

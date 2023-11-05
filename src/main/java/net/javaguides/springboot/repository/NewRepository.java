@@ -13,5 +13,5 @@ public interface NewRepository extends JpaRepository<New,Long> {
     Optional<New> findById(Long new_id);
 
     @Query(value = "SELECT * FROM New WHERE user_id = :id", nativeQuery = true)
-    List<New> findMarketByUser(@Param("id") long id);
+    List<New> findNewByUser(@Param("id") long id);
 }

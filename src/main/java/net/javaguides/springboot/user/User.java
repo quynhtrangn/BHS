@@ -21,6 +21,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -34,7 +36,7 @@ import java.util.Set;
 @Entity
 @Table(name="user_s")
 @Builder
-public class User implements UserDetails {
+public class User implements UserDetails, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -51,13 +53,13 @@ public class User implements UserDetails {
     @Column(name = "email-id")
     private String emailId;
 
-    @NotBlank(message = "Không được để trống")
+
     @Column(name = "city")
     private String city;
 
-    @NotBlank(message = "Không được để trống")
-    @Column(name = "market")
-    private String market;
+    @Column(name = "user_img")
+    private String user_img;
+
     @Column(name = "tel", unique = true)
     private String tel;
 
@@ -70,35 +72,51 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<Token> tokens;
 
 //    @OneToMany(mappedBy = "user")
 //    private List<Care> cares;
 
-    @ManyToMany(cascade={CascadeType.ALL})
-    @JoinTable(name="care",
-            joinColumns={@JoinColumn(name="user_id")},
-            inverseJoinColumns={@JoinColumn(name="user_cared")})
-    private Set<User> usercared = new HashSet<User>();
+//    @JsonIgnore
+//    @ManyToMany(cascade={CascadeType.ALL})
+//    @JoinTable(name="care",
+//            joinColumns={@JoinColumn(name="user_id")},
+//            inverseJoinColumns={@JoinColumn(name="user_cared")})
+//    private Set<User> usercared = new HashSet<User>();
 
-    @ManyToMany(mappedBy="usercared")
-    private Set<User> users = new HashSet<User>();
+    @JsonIgnore
+    @OneToMany(mappedBy = "user_main")
+    private List<Care> care;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user_cared")
+    private List<Care> cared;
+
+//    @JsonIgnore
+//    @ManyToMany(mappedBy="usercared")
+//    private Set<User> users = new HashSet<User>();
 //    @OneToMany(mappedBy = "user")
 //    private List<Care> cared;
 //
+    @JsonIgnore
     @OneToMany(mappedBy = "users")
     private List<WorkWith> workWiths;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "users")
     private List<New> news;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "users")
     private List<Follow> follows;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "users")
     private List<WorkPlace> workPlaces;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<Location> locations;
 
@@ -130,5 +148,28 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", emailId='" + emailId + '\'' +
+                ", city='" + city + '\'' +
+                ", user_img='" + user_img + '\'' +
+                ", tel='" + tel + '\'' +
+                ", password='" + password + '\'' +
+                ", role=" + role +
+                ", tokens=" + tokens +
+                ", care=" + care +
+                ", cared=" + cared +
+                ", workWiths=" + workWiths +
+                ", news=" + news +
+                ", follows=" + follows +
+                ", workPlaces=" + workPlaces +
+                ", locations=" + locations +
+                '}';
     }
 }

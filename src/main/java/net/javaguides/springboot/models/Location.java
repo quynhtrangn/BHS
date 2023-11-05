@@ -1,6 +1,7 @@
 package net.javaguides.springboot.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import net.javaguides.springboot.user.User;
@@ -34,7 +35,8 @@ public class Location {
     @Column(name = "status")
     private int status;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER,optional = false)
+    @JsonIgnore
     @JoinColumn(name = "user_id")
     public User user;
 

@@ -27,7 +27,7 @@ public class AuthenticationService {
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
                 .emailId(request.getEmailId())
-                .market(request.getMarket())
+                .user_img(request.getMarket())
                 .city(request.getCity())
                 .tel(request.getTel())
                 .password(passwordEncoder.encode(request.getPassword()))

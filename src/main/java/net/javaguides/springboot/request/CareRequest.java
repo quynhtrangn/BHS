@@ -1,8 +1,7 @@
 package net.javaguides.springboot.request;
 
-import jakarta.persistence.*;
 import lombok.*;
-import net.javaguides.springboot.models.New;
+import net.javaguides.springboot.models.Field;
 import net.javaguides.springboot.user.User;
 
 @Getter
@@ -10,8 +9,8 @@ import net.javaguides.springboot.user.User;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class FollowRequest {
-    private long follow_id;
+public class CareRequest {
+    private long care_id;
     private User users;
-    private New news;
+    private User userCared;
 }

@@ -30,7 +30,7 @@ public class MarketService {
 
         Market newMarket = repository.save(market);
 
-        return mapToDto(newMarket);
+        return mapToRequest(newMarket);
     }
 
     public void save(MarketRequest request){
@@ -43,13 +43,13 @@ public class MarketService {
     }
     public List<MarketRequest> findAll() {
         List<Market> markets = repository.findAll();
-        return markets.stream().map(market -> mapToDto(market)).collect(Collectors.toList());
+        return markets.stream().map(market -> mapToRequest(market)).collect(Collectors.toList());
     }
 
     public List<MarketRequest> getMarketByCity(long id) {
 
         List<Market> markets = repository.findMarketByCity(id);
-        return markets.stream().map(market -> mapToDto(market)).collect(Collectors.toList());
+        return markets.stream().map(market -> mapToRequest(market)).collect(Collectors.toList());
     }
 
     public boolean deleteMarket(long id){
@@ -76,16 +76,16 @@ public class MarketService {
 
         market.setMarket_name(request.getMarket_name());
         market.setAddress(request.getAddress());
-
+        market.setCity(mapToEntity(request).city);
         Market updateMarket = repository.save(market);
 
-        return mapToDto(updateMarket);
+        return mapToRequest(updateMarket);
     }
 
 
     public MarketRequest getMarketById(long id) {
         Market market = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Market could not be found"));
-        return mapToDto(market);
+        return mapToRequest(market);
     }
 
     private Market mapToEntity(MarketRequest request) {
@@ -93,9 +93,10 @@ public class MarketService {
         market.setMarket_id(request.getMarket_id());
         market.setMarket_name(request.getMarket_name());
         market.setAddress(request.getAddress());
+        market.setCity(request.getCity());
         return market;
     }
-    private MarketRequest mapToDto(Market market) {
+    private MarketRequest mapToRequest(Market market) {
 
         MarketRequest request = new MarketRequest();
         request.setMarket_id(market.getMarket_id());

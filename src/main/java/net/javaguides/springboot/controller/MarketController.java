@@ -1,14 +1,7 @@
 package net.javaguides.springboot.controller;
 
-import lombok.RequiredArgsConstructor;
-import net.javaguides.springboot.repository.MarketRepository;
-import net.javaguides.springboot.request.CityRequest;
-import net.javaguides.springboot.request.MarketRequest;
+import lombok.RequiredArgsConstructor;import net.javaguides.springboot.request.MarketRequest;
 import net.javaguides.springboot.service.MarketService;
-import net.javaguides.springboot.models.City;
-import net.javaguides.springboot.exception.ResourceNotFoundException;
-import net.javaguides.springboot.models.Market;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +21,7 @@ public class MarketController {
     }
 
     @PostMapping("/Market/{city_id}/city")
-    public ResponseEntity<MarketRequest> createReview(@PathVariable(value = "city_id") long city_id, @RequestBody MarketRequest marketRequest) {
+    public ResponseEntity<MarketRequest> createMarket(@PathVariable(value = "city_id") long city_id, @RequestBody MarketRequest marketRequest) {
         return new ResponseEntity<>(service.createMarket(city_id, marketRequest), HttpStatus.CREATED);
     }
 

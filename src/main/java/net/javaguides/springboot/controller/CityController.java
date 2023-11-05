@@ -43,7 +43,7 @@ public class CityController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<?> updatePokemon(
+    public ResponseEntity<?> updateCity(
             @RequestBody CityRequest request, @PathVariable("id") long city_id
     ) {
         CityRequest response = service.updateCity(request, city_id);

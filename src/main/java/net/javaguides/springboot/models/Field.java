@@ -1,5 +1,6 @@
 package net.javaguides.springboot.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
@@ -24,6 +25,7 @@ public class Field {
     private String fieldName;
 
     @OneToMany(mappedBy = "field")
+    @JsonIgnore
     private List<WorkWith> workWith;
 
 }

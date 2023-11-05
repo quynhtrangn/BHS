@@ -37,10 +37,10 @@ public class WorkPlaceController {
         return ResponseEntity.accepted().build();
     }
 
-    @PostMapping("/{market_id}/market/{user_id}/user")
-    public ResponseEntity<WorkPlaceRequest> createReview(@PathVariable(value = "market_id") long market_id,@PathVariable(value = "user_id") long user_id, @RequestBody WorkPlaceRequest workPlaceRequest) {
-        return new ResponseEntity<>(service.createWorkPlace(market_id,user_id, workPlaceRequest), HttpStatus.CREATED);
-    }
+//    @PostMapping("/{market_id}/market/{user_id}/user")
+//    public ResponseEntity<WorkPlaceRequest> createReview(@PathVariable(value = "market_id") long market_id,@PathVariable(value = "user_id") long user_id, @RequestBody WorkPlaceRequest workPlaceRequest) {
+//        return new ResponseEntity<>(service.createWorkPlace(market_id,user_id, workPlaceRequest), HttpStatus.CREATED);
+//    }
     @PostMapping("/user/{user_id}/addWorkPlace/{market_id}")
     public ResponseEntity<?> save(
             @PathVariable(value = "user_id") long user_id,
@@ -75,6 +75,23 @@ public class WorkPlaceController {
     public List<WorkPlaceRequest> getAllWorkPlace(
     ){
         return service.findAllWorkPlace();
+    }
+
+
+
+
+
+    @PutMapping("/{user_id}/updateWorkPlace/{market_id}")
+    public ResponseEntity<?> updateMarket(@PathVariable(value = "user_id") long user_id, @PathVariable(value = "market_id") long market_id,
+                                          @RequestBody WorkPlaceRequest request) {
+        WorkPlaceRequest updateWorkPlace = service.updateWorkPlace(user_id,market_id,request);
+        return new ResponseEntity<>(updateWorkPlace, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{user_id}/delete/{market_id}")
+    public ResponseEntity<String> deleteWorkPlace(@PathVariable("user_id") long user_id, @PathVariable("market_id") long market_id) {
+        service.deleteWorkPlace(user_id, market_id);
+        return new ResponseEntity<>("Work Place delete", HttpStatus.OK);
     }
 
 
