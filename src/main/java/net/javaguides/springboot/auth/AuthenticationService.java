@@ -3,6 +3,7 @@ package net.javaguides.springboot.auth;
 import lombok.RequiredArgsConstructor;
 import net.javaguides.springboot.config.JwtService;
 
+import net.javaguides.springboot.models.City;
 import net.javaguides.springboot.user.Role;
 import net.javaguides.springboot.user.User;
 import net.javaguides.springboot.user.UserRepository;
@@ -13,6 +14,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -73,5 +76,7 @@ public class AuthenticationService {
                 .build();
         tokenRepository.save(token);
     }
-
+    public List<User> findAll() {
+        return repository.findAll();
+    }
 }

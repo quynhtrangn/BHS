@@ -50,7 +50,7 @@ public class User implements UserDetails, Serializable {
 
     @NotBlank(message = "Không được để trống")
     @Pattern(regexp ="^[a-z0-9](\\.?[a-z0-9]){5,}@g(oogle)?mail\\.com$",message="Email không hợp lệ")
-    @Column(name = "email-id")
+    @Column(name = "email_id")
     private String emailId;
 
 
@@ -76,16 +76,6 @@ public class User implements UserDetails, Serializable {
     @OneToMany(mappedBy = "user")
     private List<Token> tokens;
 
-//    @OneToMany(mappedBy = "user")
-//    private List<Care> cares;
-
-//    @JsonIgnore
-//    @ManyToMany(cascade={CascadeType.ALL})
-//    @JoinTable(name="care",
-//            joinColumns={@JoinColumn(name="user_id")},
-//            inverseJoinColumns={@JoinColumn(name="user_cared")})
-//    private Set<User> usercared = new HashSet<User>();
-
     @JsonIgnore
     @OneToMany(mappedBy = "user_main")
     private List<Care> care;
@@ -94,12 +84,6 @@ public class User implements UserDetails, Serializable {
     @OneToMany(mappedBy = "user_cared")
     private List<Care> cared;
 
-//    @JsonIgnore
-//    @ManyToMany(mappedBy="usercared")
-//    private Set<User> users = new HashSet<User>();
-//    @OneToMany(mappedBy = "user")
-//    private List<Care> cared;
-//
     @JsonIgnore
     @OneToMany(mappedBy = "users")
     private List<WorkWith> workWiths;
@@ -124,7 +108,20 @@ public class User implements UserDetails, Serializable {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.name()));
     }
-
+    //    @OneToMany(mappedBy = "user")
+//    private List<Care> cares;
+//    @JsonIgnore
+//    @ManyToMany(cascade={CascadeType.ALL})
+//    @JoinTable(name="care",
+//            joinColumns={@JoinColumn(name="user_id")},
+//            inverseJoinColumns={@JoinColumn(name="user_cared")})
+//    private Set<User> usercared = new HashSet<User>();
+//    @JsonIgnore
+//    @ManyToMany(mappedBy="usercared")
+//    private Set<User> users = new HashSet<User>();
+//    @OneToMany(mappedBy = "user")
+//    private List<Care> cared;
+//
     @Override
     public String getUsername() {
         return tel;
