@@ -29,7 +29,7 @@ public class Market {
     @Column(name = "address")
     private String address;
 
-    @JsonIgnore
+
     @ManyToOne(fetch = FetchType.EAGER,optional = false)
     @JoinColumn(name = "city_id")
     public City city;

@@ -15,6 +15,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/auth/cities")
 @RequiredArgsConstructor
+@CrossOrigin
+
 public class CityController {
     private final CityService service;
 

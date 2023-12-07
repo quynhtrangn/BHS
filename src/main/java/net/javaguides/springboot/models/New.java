@@ -10,7 +10,9 @@ import net.javaguides.springboot.user.User;
 import java.io.Serializable;
 import java.security.Timestamp;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Getter
@@ -27,6 +29,9 @@ public class New implements Serializable {
 
     @Column(name = "new_name")
     private String new_name;
+
+    @Column(name = "new_field")
+    private String new_field;
 
     @Column(name = "new_img")
     private String new_img;
@@ -51,14 +56,14 @@ public class New implements Serializable {
     @Column(name = "status")
     private int status;
 
-    @JsonIgnore
+
     @ManyToOne(fetch = FetchType.EAGER,optional = false)
     @JoinColumn(name = "user_id")
-    public User users;
+    public Account account;
 
     @JsonIgnore
     @OneToMany(mappedBy = "news")
-    private List<Follow> follows;
+    private Set<Follow> follows = new HashSet<Follow>();
 
     @Override
     public String toString() {
@@ -72,7 +77,7 @@ public class New implements Serializable {
                 ", start_time=" + start_time +
                 ", end_time=" + end_time +
                 ", status=" + status +
-                ", users=" + users +
+                ", users=" + account +
                 ", follows=" + follows +
                 '}';
     }

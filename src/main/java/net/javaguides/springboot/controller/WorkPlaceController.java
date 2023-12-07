@@ -17,6 +17,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/auth/workPlaces")
 @RequiredArgsConstructor
+@CrossOrigin
+
 public class WorkPlaceController {
     private final WorkPlaceService service;
 

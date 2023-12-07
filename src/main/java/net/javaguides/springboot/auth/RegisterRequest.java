@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import net.javaguides.springboot.user.Role;
 
 @Data
 @Builder
@@ -15,7 +16,8 @@ public class RegisterRequest {
     private String lastName;
     private String emailId;
     private String city;
-    private String market;
     private String tel;
+    private int status;
+    private Role role;
     private String password;
 }

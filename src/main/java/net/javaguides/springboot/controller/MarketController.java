@@ -12,6 +12,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/auth/markets")
 @RequiredArgsConstructor
+@CrossOrigin
+
 public class MarketController {
     private final MarketService service;
 

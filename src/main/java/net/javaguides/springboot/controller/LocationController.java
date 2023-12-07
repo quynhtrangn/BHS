@@ -12,6 +12,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/auth/locations")
 @RequiredArgsConstructor
+@CrossOrigin
+
 public class LocationController {
     private final LocationService service;
 

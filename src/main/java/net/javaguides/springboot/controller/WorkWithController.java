@@ -13,6 +13,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/auth/workWiths")
 @RequiredArgsConstructor
+@CrossOrigin
+
 public class WorkWithController{
     private final WorkWithService service;
 

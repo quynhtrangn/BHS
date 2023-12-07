@@ -1,0 +1,31 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/bhs?allowPublicKeyRetrieval=true&useSSL=false
+    username: root
+    password: 250201
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 8987996053-0j0m1v23st4a3usjnjpt827jv863true.apps.googleusercontent.com
+            client-secret: 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
+            redirectUri: "{baseUrl}/oauth2/callback/{registrationId}"
+            scope:
+                - email
+                - profile
+frontend:
+  url: http://localhost:3000/login

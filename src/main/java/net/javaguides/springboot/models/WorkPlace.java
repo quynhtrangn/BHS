@@ -29,7 +29,7 @@ public class WorkPlace implements Serializable {
     @JoinColumn(name = "user_id")
     public User users;
 
-    @JsonIgnore
+
     @ManyToOne(fetch = FetchType.EAGER,optional = false)
     @JoinColumn(name = "market_id")
     public Market market;

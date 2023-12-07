@@ -19,6 +19,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/auth/fields")
 @RequiredArgsConstructor
+@CrossOrigin
+
 public class FieldController {
     private final FieldService service;
     @Autowired

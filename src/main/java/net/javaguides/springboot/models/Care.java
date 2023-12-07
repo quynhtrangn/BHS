@@ -25,7 +25,7 @@ public class Care {
     private User user_main;
 
     @ManyToOne(fetch = FetchType.EAGER,optional = false)
-    @JsonIgnore
+
     @JoinColumn(name = "user_cared_id")
     private User user_cared;
 }

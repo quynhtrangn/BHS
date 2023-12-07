@@ -12,6 +12,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/auth/follows")
 @RequiredArgsConstructor
+@CrossOrigin
+
 public class FollowController {
     private final FollowService service;
 

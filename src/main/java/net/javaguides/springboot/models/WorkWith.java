@@ -28,7 +28,6 @@ public class WorkWith implements Serializable {
     public User users;
 
     @ManyToOne
-    @JsonIgnore
     @JoinColumn(name = "field_id")
     private Field field;
 

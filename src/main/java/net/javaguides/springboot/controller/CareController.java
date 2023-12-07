@@ -14,6 +14,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/auth/cares")
 @RequiredArgsConstructor
+@CrossOrigin
+
 public class CareController {
     private final CareService service;
 

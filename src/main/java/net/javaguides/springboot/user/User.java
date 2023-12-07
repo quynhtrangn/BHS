@@ -72,37 +72,41 @@ public class User implements UserDetails, Serializable {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+
+
     @JsonIgnore
     @OneToMany(mappedBy = "user")
-    private List<Token> tokens;
+    private Set<Token> tokens = new HashSet<Token>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "user_main")
-    private List<Care> care;
+    private Set<Care> care = new HashSet<Care>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "user_cared")
-    private List<Care> cared;
+    private Set<Care> cared = new HashSet<Care>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "users")
-    private List<WorkWith> workWiths;
+    private Set<WorkWith> workWiths = new HashSet<WorkWith>();
+
+
 
     @JsonIgnore
     @OneToMany(mappedBy = "users")
-    private List<New> news;
+    private Set<Follow> follows = new HashSet<Follow>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "users")
-    private List<Follow> follows;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "users")
-    private List<WorkPlace> workPlaces;
+    private Set<WorkPlace> workPlaces = new HashSet<WorkPlace>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "user")
-    private List<Location> locations;
+    private Set<Location> locations = new HashSet<Location>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user")
+    private Set<Account> accounts = new HashSet<Account>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -163,7 +167,6 @@ public class User implements UserDetails, Serializable {
                 ", care=" + care +
                 ", cared=" + cared +
                 ", workWiths=" + workWiths +
-                ", news=" + news +
                 ", follows=" + follows +
                 ", workPlaces=" + workPlaces +
                 ", locations=" + locations +

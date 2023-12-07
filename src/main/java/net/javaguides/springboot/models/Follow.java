@@ -26,7 +26,7 @@ public class Follow {
     private User users;
 
     @ManyToOne(fetch = FetchType.EAGER,optional = false)
-    @JsonIgnore
+
     @JoinColumn(name = "new_id")
     private New news;
 }
